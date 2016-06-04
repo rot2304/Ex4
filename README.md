@@ -188,3 +188,105 @@ for (z in 1:length(train_data$query)){
       }
     } 
 ```
+
+## שלב רביעי- ניקוי נתוני המבחן:
+ניקוי העמודה שאילתא:
+ ```{r}
+   test_data <- read.csv("test.csv", header=TRUE)
+    test_data$query <-  gsub("<.*?>", "", test_data$query) 
+    test_data$query <-  gsub("&nbsp;", " ", test_data$query)
+    dfCorpus = Corpus(VectorSource(test_data$query)) 
+    dfCorpus <- tm_map(dfCorpus, removeWords, stopwords("english"))   
+    dfCorpus <- tm_map(dfCorpus, removePunctuation) 
+    dataframe<-data.frame(text=unlist(sapply(dfCorpus, `[`, "content")), stringsAsFactors=F)
+    test_data$query<-tolower(dataframe$text) 
+```
+ניקוי העמודה "תיאור מוצר":
+```{r}
+    test_data$product_description <-  gsub("<.*?>", "", test_data$product_description) 
+    test_data$product_description <-  gsub("&nbsp;", " ", test_data$product_description)
+    dfCorpus = Corpus(VectorSource(test_data$product_description)) 
+    dfCorpus <- tm_map(dfCorpus, removeWords, stopwords("english"))   
+    dfCorpus <- tm_map(dfCorpus, removePunctuation) 
+    dataframe<-data.frame(text=unlist(sapply(dfCorpus, `[`, "content")), stringsAsFactors=F)
+    test_data$product_description<-tolower(dataframe$text) 
+```
+ניקוי העמודה "שם מוצר":
+```{r}
+   test_data$product_title <-  gsub("<.*?>", "", test_data$product_title) 
+    test_data$product_title <-  gsub("&nbsp;", " ", test_data$product_title)
+    dfCorpus = Corpus(VectorSource(test_data$product_title)) 
+    dfCorpus <- tm_map(dfCorpus, removeWords, stopwords("english"))   
+    dfCorpus <- tm_map(dfCorpus, removePunctuation) 
+    dataframe<-data.frame(text=unlist(sapply(dfCorpus, `[`, "content")), stringsAsFactors=F)
+    test_data$product_title<-tolower(dataframe$text) 
+```
+
+##שלב חמישי- חישוב מדד הדימיון בין מאפיינים שונים בנתוני המבחן:
+דימיון בין עמודת "שאילתא" לבין עמודת "שם מוצר":
+```{r}
+   for (i in 1:length(test_data$query)){ 
+      if(test_data$product_title[i]!="")
+      {
+        temp <- c(test_data$query[i],test_data$product_title[i])
+        myDfm <- dfm(temp, verbose = FALSE)
+        sim <- similarity(myDfm, docnames(myDfm), margin = "documents", method = "cosine")
+        test_data$sim_query_title[i] <- sim$text2[["text1"]]
+      }
+      else
+      {
+        test_data$sim_query_title[i]=0
+      }
+    }
+```
+
+דימיון בין המאפיין "שאילתא" לבין המאפיין "תיאור מוצר":
+```{r}
+ for (z in 1:length(test_data$query)){ 
+      if(test_data$product_description[z]!="")
+      {
+        temp <- c(test_data$query[z],test_data$product_description[z])
+        myDfm <- dfm(temp, verbose = FALSE)
+        sim <- similarity(myDfm, docnames(myDfm), margin = "documents", method = "cosine")
+        test_data$sim_query_description[z] <- sim$text2[["text1"]]
+      }
+      else
+      {
+        test_data$sim_query_description[z] = 0
+      }
+    } 
+```
+
+
+דימיון q-gram
+בין "שאילתא" ל"שם מוצר":
+```{r}
+   for (z in 1:length(test_data$query)){ 
+      if(test_data$product_title[z]!="")
+      {
+        qgra_sim <- stringsim(test_data$query[z],test_data$product_title[z],method='qgram', q=4)
+        test_data$simq_query_title[z] <- qgra_sim
+      }
+      else
+      {
+        test_data$simq_query_title[z] = 0
+      }
+    } 
+```
+
+דימיון q-gram
+בין "שאילתא" ל"תיאור מוצר":
+```{r}
+    for (z in 1:length(test_data$query)){ 
+      if(test_data$product_description[z]!="")
+      {
+        qgra_sim <- stringsim(test_data$query[z],test_data$product_description[z],method='qgram', q=4)
+        test_data$simq_query_description[z] <- qgra_sim
+      }
+      else
+      {
+        test_data$simq_query_description[z] = 0
+      }
+    } 
+```
+
