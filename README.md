@@ -68,8 +68,8 @@ for (z in 1:length(train_data$query)){
           train_data$sim_query_description[z] = 0
         }
     } 
-    ```
-    
+```
+
 דימיון q-gram
 בין "שאילתא" ל"שם מוצר":
 ```{r}
@@ -84,10 +84,10 @@ for (z in 1:length(train_data$query)){
         train_data$simq_query_title[z] = 0
       }
     } 
-       ```
-       
-    דימיון q-gram 
-    בין "שאילתא" ל"תיאור מוצר":
+```
+
+דימיון q-gram
+בין "שאילתא" ל"תיאור מוצר":
     ```{r}
      for (z in 1:length(train_data$query)){ 
       if(train_data$product_description[z]!="")
