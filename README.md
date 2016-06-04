@@ -103,7 +103,7 @@ for (z in 1:length(train_data$query)){
 ```
 
  מרחק לוינשטין בין "שאילתא" ל"שם מוצר":
-       ```{r}
+ ```{r}
       for (z in 1:length(train_data$query)){ 
       if(train_data$product_title[z]!="")
       {
