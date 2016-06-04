@@ -342,7 +342,6 @@ for (z in 1:length(train_data$query)){
       }
     } 
 ```
-
 דימיון ג'אקרד בין "שאילתא" ל"תיאור מוצר":
  ```{r}
   for (z in 1:length(test_data$query)){ 
@@ -354,6 +353,26 @@ for (z in 1:length(train_data$query)){
       else
       {
         test_data$simjac_query_description[z] = 0
+      }
+    } 
+```
+
+##שלב שישי- מציאת מילים משותפות בין מאפיינים בנתוני המבחן:
+מציאת מילים משותפות  בין "שאילתא" ל"שם המוצר":
+ ```{r}
+for (z in 1:length(test_data$query)){ 
+      if(test_data$product_title[z]!="")
+      {
+        a <- test_data$query[z]
+        b <- test_data$product_title[z]
+        a_split <- unlist(strsplit(a, split=" "))
+        b_split <- unlist(strsplit(b, split=" "))
+        test_data$sim_intresect[z]  <- length(intersect(a_split, b_split))
+        
+      }
+      else
+      {
+        test_data$sim_intresect[z] = 0
       }
     } 
 ```
