@@ -326,3 +326,34 @@ for (z in 1:length(train_data$query)){
       }
     } 
 ```
+
+
+דימיון ג'אקרד בין "שאילתא" ל"שם מוצר":
+ ```{r}
+    for (z in 1:length(test_data$query)){ 
+      if(test_data$product_title[z]!="")
+      {
+        jac_sim <- stringsim(test_data$query[z],test_data$product_title[z],method='jaccard', q=4)
+        test_data$simjac_query_title[z] <- jac_sim
+      }
+      else
+      {
+        test_data$simjac_query_title[z] = 0
+      }
+    } 
+```
+
+דימיון ג'אקרד בין "שאילתא" ל"תיאור מוצר":
+ ```{r}
+  for (z in 1:length(test_data$query)){ 
+      if(test_data$product_description[z]!="")
+      {
+        jac_sim <- stringsim(test_data$query[z],test_data$product_description[z],method='jaccard', q=4)
+        test_data$simjac_query_description[z] <- jac_sim
+      }
+      else
+      {
+        test_data$simjac_query_description[z] = 0
+      }
+    } 
+```
