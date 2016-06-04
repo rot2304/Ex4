@@ -360,7 +360,7 @@ for (z in 1:length(train_data$query)){
 ##שלב שישי- מציאת מילים משותפות בין מאפיינים בנתוני המבחן:
 מציאת מילים משותפות  בין "שאילתא" ל"שם המוצר":
  ```{r}
-for (z in 1:length(test_data$query)){ 
+ for (z in 1:length(test_data$query)){ 
       if(test_data$product_title[z]!="")
       {
         a <- test_data$query[z]
