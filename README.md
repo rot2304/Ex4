@@ -376,3 +376,52 @@ for (z in 1:length(train_data$query)){
       }
     } 
 ```
+##שלב שביעי- סיווג:
+חילוץ המאפיינים עבור נתוני האימון ונתוני המבחן:
+ ```{r}
+ train_data_features <- select(train_data, sim_query_title, sim_query_description,simlv_query_title,simlv_query_description,simq_query_title,simq_query_description,simjac_query_title,simjac_query_description,sim_intresect,median_relevance)
+    test_data_features <- select(test_data, sim_query_title, sim_query_description, simlv_query_title,simlv_query_description,simq_query_title,simq_query_description,simjac_query_title,simjac_query_description,sim_intresect)
+```
+סיווג עם מודל j48:
+ ```{r}
+ train_data_features$median_relevance<-as.factor(train_data_features$median_relevance)
+    fit <- J48(median_relevance~., data=train_data_features)
+    summary(fit)
+    predictions <- predict(fit, test_data_features)
+    submit_data <- read.csv("test.csv", header=TRUE)
+    submit_data <- select(submit_data,id)
+    submit_data["prediction"] <- predictions
+    write.csv(submit_data, file = "Submission.csv")
+```
+סיווג עם מודל SVM:
+ ```{r}
+ train_data_features$median_relevance<-as.factor(train_data_features$median_relevance)
+    model <- svm(median_relevance ~ ., data = train_data_features)
+    pred <- predict(model, test_data_features)
+    submit_data <- read.csv("test.csv", header=TRUE)
+    submit_data<- select(submit_data,id)
+    submit_data["prediction"] <- pred
+    write.csv(submit_data, file = "Submission.csv")
+```
+סיווג עם מודל רשת נוירונים:
+```{r}
+ train_data_features$median_relevance<-as.factor(train_data_features$median_relevance)
+    model<- nnet(median_relevance~., train_data_features,size=50,type="class")
+    pred <- predict(model, test_data_features)
+    predict <- colnames(pred)[apply(pred,1,which.max)]
+    submit_data <- read.csv("test.csv", header=TRUE)
+    submit_data<- select(submit_data,id)
+    submit_data["prediction"] <- predict
+    write.csv(submit_data, file = "Submission.csv")
+```
+סיווג עם מודל RANDOM FOREST:
+```{r}
+ train_data_features$median_relevance<-as.factor(train_data_features$median_relevance)
+    fit <- randomForest(median_relevance~., data=train_data_features, importance=TRUE, ntree=2000)
+    summary(fit)
+    predictions <- predict(fit, test_data_features)
+    submit_data <- read.csv("test.csv", header=TRUE)
+    submit_data <- select(submit_data,id)
+    submit_data["prediction"] <- predictions
+    write.csv(submit_data, file = "Submission1.csv")
+```
