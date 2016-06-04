@@ -277,7 +277,7 @@ for (z in 1:length(train_data$query)){
 דימיון q-gram
 בין "שאילתא" ל"תיאור מוצר":
 ```{r}
-    for (z in 1:length(test_data$query)){ 
+ for (z in 1:length(test_data$query)){ 
       if(test_data$product_description[z]!="")
       {
         qgra_sim <- stringsim(test_data$query[z],test_data$product_description[z],method='qgram', q=4)
@@ -290,3 +290,39 @@ for (z in 1:length(train_data$query)){
     } 
 ```
 
+
+ מרחק לוינשטין בין "שאילתא" ל"שם מוצר":
+ ```{r}
+ for (z in 1:length(test_data$query)){ 
+      if(test_data$product_title[z]!="")
+      {
+        lv_sim <- levenshteinSim(test_data$query[z],test_data$product_title[z])
+        test_data$simlv_query_title[z] <- lv_sim
+        lv_distance <- levenshteinDist(test_data$query[z],test_data$product_title[z])
+        test_data$dislv_query_title[z] <- lv_distance
+      }
+      else
+      {
+        test_data$simlv_query_title[z] = 0
+        test_data$dislv_query_title[z] = 0
+      }
+    } 
+```
+
+מרחק לוינשטיין בין "שאילתא" ל"תיאור מוצר":
+ ```{r}
+ for (z in 1:length(test_data$query)){ 
+      if(test_data$product_description[z]!="")
+      {
+        lv_sim <- levenshteinSim(test_data$query[z],test_data$product_description[z])
+        test_data$simlv_query_description[z] <- lv_sim
+        lv_distance <- levenshteinDist(test_data$query[z],test_data$product_description[z])
+        test_data$dislv_query_description[z] <- lv_distance
+      }
+      else
+      {
+        test_data$simlv_query_description[z] = 0
+        test_data$dislv_query_description[z]= 0
+      }
+    } 
+```
