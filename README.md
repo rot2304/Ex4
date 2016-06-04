@@ -168,3 +168,23 @@ for (z in 1:length(train_data$query)){
       }
     } 
 ```
+
+##שלב שלישי- יצירת הפיצ'ר "מילים משותפות" בין מאפיינים שונים:
+מציאת מילים משותפות  בין "שאילתא" ל"שם המוצר":
+ ```{r}
+  for (z in 1:length(train_data$query)){ 
+      if(train_data$product_title[z]!="")
+      {
+        a <- train_data$query[z]
+        b <- train_data$product_title[z]
+        a_split <- unlist(strsplit(a, split=" "))
+        b_split <- unlist(strsplit(b, split=" "))
+        train_data$sim_intresect[z]  <- length(intersect(a_split, b_split))
+       
+      }
+      else
+      {
+        train_data$sim_intresect[z] = 0
+      }
+    } 
+```
