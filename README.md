@@ -88,7 +88,7 @@ for (z in 1:length(train_data$query)){
 
 דימיון q-gram
 בין "שאילתא" ל"תיאור מוצר":
-    ```{r}
+```{r}
      for (z in 1:length(train_data$query)){ 
       if(train_data$product_description[z]!="")
       {
@@ -100,9 +100,9 @@ for (z in 1:length(train_data$query)){
         train_data$simq_query_description[z] = 0
       }
     } 
-      ```
-      
-      מרחק לוינשטין בין "שאילתא" ל"שם מוצר":
+```
+
+ מרחק לוינשטין בין "שאילתא" ל"שם מוצר":
        ```{r}
       for (z in 1:length(train_data$query)){ 
       if(train_data$product_title[z]!="")
