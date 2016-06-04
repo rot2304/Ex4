@@ -119,3 +119,21 @@ for (z in 1:length(train_data$query)){
       }
     } 
 ```
+
+מרחק לוינשטיין בין "שאילתא" ל"תיאור מוצר":
+ ```{r}
+      for (z in 1:length(train_data$query)){ 
+      if(train_data$product_description[z]!="")
+      {
+        lv_sim <- levenshteinSim(train_data$query[z],train_data$product_description[z])
+        train_data$simlv_query_description[z] <- lv_sim
+        lv_distance <- levenshteinDist(train_data$query[z],train_data$product_description[z])
+        train_data$dislv_query_description[z] <- lv_distance
+      }
+      else
+      {
+        train_data$simlv_query_description[z] = 0
+        train_data$dislv_query_description[z] = 0
+      }
+    } 
+```
