@@ -118,4 +118,4 @@ for (z in 1:length(train_data$query)){
         train_data$dislv_query_title[z] = 0
       }
     } 
-      ```
+```
