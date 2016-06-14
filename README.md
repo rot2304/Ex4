@@ -428,4 +428,4 @@ for (z in 1:length(train_data$query)){
 
 ##הגשות שבוצעו:
 
-[a link](https://github.com/rot2304/Ex4/blob/master/Submission1.zip)
+[Submission1](https://github.com/rot2304/Ex4/blob/master/Submission1.zip)
