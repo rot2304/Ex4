@@ -429,3 +429,5 @@ for (z in 1:length(train_data$query)){
 ##הגשות שבוצעו:
 
 [Submission1](https://github.com/rot2304/Ex4/blob/master/Submission1.zip)
+
+![](https://cloud.githubusercontent.com/assets/17852872/16049474/87c8998c-3260-11e6-9887-310600723763.PNG)
