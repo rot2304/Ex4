@@ -425,3 +425,7 @@ for (z in 1:length(train_data$query)){
     submit_data["prediction"] <- predictions
     write.csv(submit_data, file = "Submission1.csv")
 ```
+
+##הגשות שבוצעו:
+
+[a link](https://github.com/rot2304/Ex4/blob/master/Submission1.zip)
