@@ -440,5 +440,6 @@ for (z in 1:length(train_data$query)){
 
 ![](https://cloud.githubusercontent.com/assets/17852872/16049478/8d09ea2c-3260-11e6-961e-09d41a1ad3b6.PNG)
 
+[Submission4](https://github.com/rot2304/Ex4/blob/master/Submission4.zip)
 
 ![](https://cloud.githubusercontent.com/assets/17852872/16049494/9891b762-3260-11e6-92d6-c89dbca42aad.PNG)
