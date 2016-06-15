@@ -431,3 +431,7 @@ for (z in 1:length(train_data$query)){
 [Submission1](https://github.com/rot2304/Ex4/blob/master/Submission1.zip)
 
 ![](https://cloud.githubusercontent.com/assets/17852872/16049474/87c8998c-3260-11e6-9887-310600723763.PNG)
+![](https://cloud.githubusercontent.com/assets/17852872/16049474/87c8998c-3260-11e6-9887-310600723763.PNG)
+![](https://cloud.githubusercontent.com/assets/17852872/16049477/8cde1c9e-3260-11e6-873c-942afc04ef2c.PNG)
+![](https://cloud.githubusercontent.com/assets/17852872/16049478/8d09ea2c-3260-11e6-961e-09d41a1ad3b6.PNG)
+![](https://cloud.githubusercontent.com/assets/17852872/16049494/9891b762-3260-11e6-92d6-c89dbca42aad.PNG)
